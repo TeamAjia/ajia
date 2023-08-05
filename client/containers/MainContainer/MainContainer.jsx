@@ -3,10 +3,40 @@ import IntroContainer from '../IntroContainer/IntroContainer.jsx';
 import SongsContainer from '../SongsContainer/SongsContainer.jsx';
 import ArtistContainer from '../ArtistContainer/ArtistContainer.jsx';
 import GenreContainer from '../GenreContainer/GenreContainer.jsx';
+import { extractCode } from '../../helpers/helpers.js';
+import { useEffect } from 'react';
 
 const MainContainer = (props) => {
+  useEffect(() => {
+    extractCode();
+    console.log(localStorage.getItem('access_token'));
+    const data = {
+      toke: localStorage.getItem('access_token'),
+    };
+
+    const getData = async () => {
+      await fetch('/name', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      await fetch('/artists', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      await fetch('/songs', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      await fetch('/genres', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      getData();
+    };
+  }, []);
+
   return (
-    <div className="mx-10 grid-cols-1 h-screen">
+    <div className='mx-10 grid-cols-1 h-screen'>
       <IntroContainer />
       <div>
         <h2>Top 10 Songs</h2>

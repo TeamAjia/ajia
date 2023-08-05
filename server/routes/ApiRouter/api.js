@@ -11,16 +11,18 @@ const router = express.Router();
 
 // endpoints
 // router.get, getName
-router.get('/name', MusicController.getName, (req, res) => {});
+router.post('/name', MusicController.getName, (req, res) => {});
 
 // router.get, getArtist
-router.get('/artists', MusicController.getArtist, (req, res) => {});
+router.post('/artists', MusicController.getArtist, (req, res) => {
+  return res.status(200).json(res.locals.artists);
+});
 
 // router.get, getSongs
-router.get('/songs', MusicController.getSongs, (req, res) => {});
+router.post('/songs', MusicController.getSongs, (req, res) => {});
 
 // router.get, getGenre
-router.get('/genres', MusicController.getGenre, (req, res) => {});
+router.post('/genres', MusicController.getGenre, (req, res) => {});
 
 // export router
 module.exports = router;
