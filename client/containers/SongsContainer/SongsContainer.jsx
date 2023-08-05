@@ -43,12 +43,12 @@ const songArr = [
 const SongsContainer = () => {
   //Create all card components
 
-  const songCards = songArr.map((el) => {
-    return <Card url={el.url} />;
+  const songCards = songArr.map((el, idx) => {
+    return <Card url={el.url} num={idx + 1} />;
   });
 
   return (
-    <div className="carousel carousel-center max-w-screen p-4 space-x-12 bg-neutral rounded-box">
+    <div className="carousel carousel-center max-w-full p-4 space-x-8 bg-neutral rounded-box scroll-smooth">
       {songCards}
     </div>
   );
