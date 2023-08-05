@@ -1,10 +1,16 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainContainer from './containers/MainContainer/MainContainer.jsx';
+import LoginContainer from './containers/LogInContainer/LogInContainer.jsx';
 
 const App = (prop) => {
   return (
-    <div className="bg-slate-800  w-screen h-screen text-white">
-      Hello World
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginContainer />} />
+        <Route path="/home" element={<MainContainer />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
