@@ -48,7 +48,7 @@ const SongsContainer = () => {
   });
 
   return (
-    <div className="carousel carousel-center max-w-full p-4 space-x-8 bg-neutral rounded-box scroll-smooth">
+    <div className='carousel carousel-center max-w-full p-4 space-x-8 bg-neutral rounded-box scroll-smooth'>
       {songCards}
     </div>
   );

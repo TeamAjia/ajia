@@ -5,7 +5,7 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: '#0000a3',
+          primary: '#1DB954',
 
           secondary: '#b68ad8',
 
@@ -13,7 +13,7 @@ module.exports = {
 
           neutral: '#27242d',
 
-          'base-100': '#332541',
+          'base-100': '#191414',
 
           info: '#7bc9ea',
 
