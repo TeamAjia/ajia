@@ -4,6 +4,8 @@ import SongsContainer from '../SongsContainer/SongsContainer.jsx';
 import ArtistContainer from '../ArtistContainer/ArtistContainer.jsx';
 import PlaylistContainer from '../PlaylistContainer/PlaylistContainer.jsx';
 import { extractCode } from '../../helpers/helpers.js';
+import { checkAccessToken } from '../../helpers/helpers.js';
+import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const MainContainer = (props) => {
@@ -12,15 +14,21 @@ const MainContainer = (props) => {
   const [topTenPlaylists, setTopPlaylists] = useState([]);
   const [username, setUsername] = useState({});
 
+  const checkAccessToken = () => {
+    if (!localStorage.getItem('access_token')) {
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
-    extractCode();
     console.log(localStorage.getItem('access_token'));
     const data = {
       toke: localStorage.getItem('access_token'),
     };
 
     console.log('main cont', data);
-    console.log('main cont', JSON.stringify(data));
+    // console.log('main cont', JSON.stringify(data));
 
     const getData = async (data) => {
       //Gets username from spotify api
@@ -72,22 +80,24 @@ const MainContainer = (props) => {
     getData(data);
   }, []);
 
-  return (
+  return checkAccessToken() ? (
     <div className=" mx-10 mt-5 grid-cols-1 h-screen font-mono">
       <IntroContainer username={username} />
       <div>
-        <h2 className="text-xl">Top 10 Songs</h2>
+        <h2 className="text-xl mt-5">Top 10 Songs</h2>
         <SongsContainer topSongs={topTenSong} />
       </div>
       <div>
-        <h2 className="text-xl">Top 10 Artist</h2>
+        <h2 className="text-xl mt-5">Top 10 Artist</h2>
         <ArtistContainer topArtists={topTenArtists} />
       </div>
       <div>
-        <h2 className="text-xl">Top Playlists</h2>
+        <h2 className="text-xl mt-5">Featured Playlists</h2>
         <PlaylistContainer playlists={topTenPlaylists} />
       </div>
     </div>
+  ) : (
+    <Navigate to="/" />
   );
 };
 

@@ -8,7 +8,7 @@ const LoginComponent = (prop) => {
   const handleAuth = async (e) => {
     console.log('authconroller');
     const clientId = 'f1ae3071e1544d8a9722e15b1dd38489';
-    const redirectUri = 'http://localhost:8080/home';
+    const redirectUri = 'http://localhost:8080/login';
 
     let codeVerifier = generateRandomString(128);
 
@@ -33,10 +33,10 @@ const LoginComponent = (prop) => {
   };
 
   return (
-    <div className='flex flex-col h-screen flex-row items-center justify-center'>
+    <div className="flex flex-col h-screen flex-row items-center justify-center">
       <button
         onClick={(e) => handleAuth(e)}
-        className='btn btn-outline btn-success'
+        className="btn btn-outline btn-success"
       >
         Login With Spotify
       </button>
