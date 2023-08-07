@@ -4,7 +4,7 @@ import Card from '../../components/CardsComponent/Card.jsx';
 const SongsContainer = (props) => {
   const { topSongs } = props;
 
-  const songCards = songArr.map((el, idx) => {
+  const songCards = topSongs.map((el, idx) => {
     return (
       <Card
         url={el.image}
