@@ -38,6 +38,7 @@ function extractCode() {
     client_id: 'f1ae3071e1544d8a9722e15b1dd38489',
     code_verifier: codeVerifier,
   });
+  console.log(body);
 
   const response = fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',

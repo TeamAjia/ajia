@@ -15,6 +15,7 @@ router.post('/name', MusicController.getName, (req, res) => {});
 
 // router.get, getArtist
 router.post('/artists', MusicController.getArtist, (req, res) => {
+  console.log('router', res.locals.artists);
   return res.status(200).json(res.locals.artists);
 });
 
