@@ -31,7 +31,7 @@ const MainContainer = (props) => {
         },
         body: JSON.stringify(data),
       });
-      const user = await response.json();
+      const user = await userResponse.json();
       setUsername(user);
 
       //gets list of top 10 songs from spotify api
@@ -42,7 +42,7 @@ const MainContainer = (props) => {
         },
         body: JSON.stringify(data),
       });
-      const songs = await response.json();
+      const songs = await songResponse.json();
       setTopTenSongs(songs);
 
       //gets list of top 10 artists form spotify api
@@ -54,7 +54,7 @@ const MainContainer = (props) => {
         body: JSON.stringify(data),
       });
 
-      const artists = await response.json();
+      const artists = await artistResponse.json();
       setTopTenArtists(artists);
       console.log('main container', artists);
 
@@ -66,14 +66,14 @@ const MainContainer = (props) => {
         },
         body: JSON.stringify(data),
       });
-      const genres = await response.json();
+      const genres = await genreResponse.json();
       setTopGenre(genres);
     };
     getData(data);
   }, []);
 
   return (
-    <div className="mx-10 grid-cols-1 h-screen">
+    <div className='mx-10 grid-cols-1 h-screen'>
       <IntroContainer username={username} />
       <div>
         <h2>Top 10 Songs</h2>

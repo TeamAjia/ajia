@@ -8,16 +8,16 @@ const ArtistCardComponent = (props) => {
     window.open(link, '_blank');
   };
   return (
-    <div className="flex carousel-item overflow-x">
-      <div class="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className='flex carousel-item overflow-x'>
+      <div className='card card-compact w-96 bg-base-100 shadow-xl'>
         <figure>
-          <img src={url} alt="Artists Picture" />
+          <img src={url} alt='Artists Picture' />
         </figure>
-        <div class="card-body">
-          <h2 class="card-title">{name}</h2>
+        <div className='card-body'>
+          <h2 className='card-title'>{name}</h2>
           <p>Genre: {genre}</p>
-          <div class="card-actions justify-end">
-            <button onClick={openSportify()} class="btn btn-primary">
+          <div className='card-actions justify-end'>
+            <button onClick={openSpotify} className='btn btn-primary'>
               {name}'s Spotify
             </button>
           </div>
