@@ -43,9 +43,14 @@ router.post(
 );
 
 // router.get, getGenre
-router.post('/playlists', MusicController.getPlaylists, (req, res) => {
-  return res.status(200).json(res.locals.playlists);
-});
+router.post(
+  '/playlists',
+  MusicController.getPlaylists,
+  MusicController.getPlaylistsDetails,
+  (req, res) => {
+    return res.status(200).json(res.locals.playlists);
+  }
+);
 
 // export router
 module.exports = router;
