@@ -31,9 +31,9 @@ MusicController.getNameDetails = (req, res, next) => {
 
   res.locals.name = nameDetails;
 
-  console.lof(res.locals.name);
+  console.log('reslocalsname', res.locals.name);
 
-  console.log(res.locals.name);
+  //   console.log(res.locals.name);
   return next();
 };
 
@@ -125,12 +125,15 @@ MusicController.getSongsDetails = (req, res, next) => {
 MusicController.getPlaylists = (req, res, next) => {
   console.log('in the music controller get songs middleware');
   const { toke } = req.body;
-  fetch('https://api.spotify.com/v1/browse/featured-playlists', {
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + toke,
-    },
-  })
+  fetch(
+    'https://api.spotify.com/v1/browse/featured-playlists?limit=10&offset=0',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + toke,
+      },
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       res.locals.playlists = data;
