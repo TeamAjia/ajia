@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CardInfo from '../CardInfoComponent/CardInfo.jsx';
 
 const Card = (props) => {
-  const { url, num, duration, arist, album, link, name } = props;
+  const { url, num, duration, artist, album, link, name } = props;
   return (
     <div className="flex carousel-item overflow-x">
       <p className="self-center top-0 left-0 text-9xl text-accent/90 rounded-box">
@@ -11,13 +11,13 @@ const Card = (props) => {
       <label className="swap swap-flip">
         <input type="checkbox" />
         <div className="swap-off">
-          <img src={url} className="rounded-box ring ring-accent" />
+          <img src={url} className="rounded-box ring ring-accent scale-50" />
         </div>
         <CardInfo
           duration={duration}
           name={name}
           link={link}
-          artist={arist}
+          artist={artist}
           album={album}
         />
       </label>
