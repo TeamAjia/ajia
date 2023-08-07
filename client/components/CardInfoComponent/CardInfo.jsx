@@ -4,7 +4,7 @@ const CardInfo = (props) => {
   const { name, duration, artist, album, link } = props;
 
   return (
-    <div className="flex flex-col flex-wrap-R swap-on bg-black rounded-box ring ring-accent font-mono text-sm ">
+    <div className="flex flex-col flex-wrap-R swap-on bg-black rounded-box ring ring-accent font-mono text-sm scale-50">
       <p className="p-2 text-white flex flex-wrap">Song Title: {name}</p>
       <p className="p-2 text-white">Duration: {duration} </p>
       <p className="p-2 text-white">Artist: {artist}</p>

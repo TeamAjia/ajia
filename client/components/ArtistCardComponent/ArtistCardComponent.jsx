@@ -11,7 +11,7 @@ const ArtistCardComponent = (props) => {
     <div className="flex carousel-item overflow-x">
       <div className="card card-compact w-96 bg-base-100 shadow-xl">
         <figure>
-          <img src={url} alt="Artists Picture" className="scale-50" />
+          <img src={url} alt="Artists Picture" className="scale-100" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
