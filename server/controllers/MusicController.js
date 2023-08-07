@@ -22,17 +22,18 @@ MusicController.getName = (req, res, next) => {
 MusicController.getNameDetails = (req, res, next) => {
   console.log('in get name details middleware');
   const items = res.locals.name;
+  console.log(items.display_name);
 
   const nameDetails = {
     display_name: items.display_name,
     image: items.images[0].url,
   };
 
-  // console.log(artistDetails);
-
   res.locals.name = nameDetails;
 
-  console.log(res.locals.name);
+  console.log('reslocalsname', res.locals.name);
+
+  //   console.log(res.locals.name);
   return next();
 };
 
@@ -121,6 +122,23 @@ MusicController.getSongsDetails = (req, res, next) => {
   return next();
 };
 
-MusicController.getGenre = () => {};
+MusicController.getPlaylists = (req, res, next) => {
+  console.log('in the music controller get songs middleware');
+  const { toke } = req.body;
+  fetch(
+    'https://api.spotify.com/v1/browse/featured-playlists?limit=10&offset=0',
+    {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + toke,
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      res.locals.playlists = data;
+      return next();
+    });
+};
 
 module.exports = MusicController;
