@@ -6,10 +6,13 @@ import ProfileContainer from '../ProfileContainer/ProfileContainer.jsx';
 const IntroContainer = (props) => {
   const { username } = props;
   return (
-    <div className="flex content-end justify-between border border-black h-20">
-      <WelcomeComponent username={username.display_name} />
-      <ProfileContainer image={username.image} />
-    </div>
+    <>
+      <div className="flex justify-between">
+        <WelcomeComponent username={username.display_name} />
+        <ProfileContainer image={username.image} />
+      </div>
+      <div class="divider"></div>
+    </>
   );
 };
 

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import IntroContainer from '../IntroContainer/IntroContainer.jsx';
 import SongsContainer from '../SongsContainer/SongsContainer.jsx';
 import ArtistContainer from '../ArtistContainer/ArtistContainer.jsx';
-import GenreContainer from '../GenreContainer/GenreContainer.jsx';
+import PlaylistContainer from '../PlaylistContainer/PlaylistContainer.jsx';
 import { extractCode } from '../../helpers/helpers.js';
 import { useEffect } from 'react';
 
 const MainContainer = (props) => {
   const [topTenSong, setTopTenSongs] = useState([]);
   const [topTenArtists, setTopTenArtists] = useState([]);
-  const [topTenGenre, setTopGenre] = useState([]);
+  const [topTenPlaylists, setTopPlaylists] = useState([]);
   const [username, setUsername] = useState({});
 
   useEffect(() => {
@@ -59,33 +59,33 @@ const MainContainer = (props) => {
       console.log('main container', artists);
 
       //Gets top 10 genres from spotify
-      const genreResponse = await fetch('/api/genres', {
+      const playlistsResponse = await fetch('/api/playlists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-      const genres = await genreResponse.json();
-      setTopGenre(genres);
+      const playlists = await playlistsResponse.json();
+      setTopPlaylists(playlists);
     };
     getData(data);
   }, []);
 
   return (
-    <div className='mx-10 grid-cols-1 h-screen'>
+    <div className=" mx-10 mt-5 grid-cols-1 h-screen font-mono">
       <IntroContainer username={username} />
       <div>
-        <h2>Top 10 Songs</h2>
+        <h2 className="text-xl">Top 10 Songs</h2>
         <SongsContainer topSongs={topTenSong} />
       </div>
       <div>
-        <h2>Top 10 Artist</h2>
+        <h2 className="text-xl">Top 10 Artist</h2>
         <ArtistContainer topArtists={topTenArtists} />
       </div>
       <div>
-        <h2>Top Genres</h2>
-        <GenreContainer topGenre={topTenGenre} />
+        <h2 className="text-xl">Top Playlists</h2>
+        <PlaylistContainer playlists={topTenPlaylists} />
       </div>
     </div>
   );
