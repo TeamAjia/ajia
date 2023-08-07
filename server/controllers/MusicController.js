@@ -121,6 +121,20 @@ MusicController.getSongsDetails = (req, res, next) => {
   return next();
 };
 
-MusicController.getGenre = () => {};
+MusicController.getPlaylists = (req, res, next) => {
+  console.log('in the music controller get songs middleware');
+  const { toke } = req.body;
+  fetch('https://api.spotify.com/v1/browse/featured-playlists', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + toke,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      res.locals.playlists = data;
+      return next();
+    });
+};
 
 module.exports = MusicController;
