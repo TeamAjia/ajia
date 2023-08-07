@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IntroContainer from '../IntroContainer/IntroContainer.jsx';
 import SongsContainer from '../SongsContainer/SongsContainer.jsx';
 import ArtistContainer from '../ArtistContainer/ArtistContainer.jsx';
@@ -7,6 +7,11 @@ import { extractCode } from '../../helpers/helpers.js';
 import { useEffect } from 'react';
 
 const MainContainer = (props) => {
+  const [topTenSong, setTopTenSongs] = useState([]);
+  const [topTenArtists, setTopTenArtists] = useState([]);
+  const [topTenGenre, setTopGenre] = useState([]);
+  const [username, setUsername] = useState({});
+
   useEffect(() => {
     extractCode();
     console.log(localStorage.getItem('access_token'));
@@ -18,12 +23,30 @@ const MainContainer = (props) => {
     console.log('main cont', JSON.stringify(data));
 
     const getData = async (data) => {
-      // await fetch('/name', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data),
-      // });
+      //Gets username from spotify api
+      const userResponse = await fetch('/api/name', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const user = await response.json();
+      setUsername(user);
 
-      const response = await fetch('/api/artists', {
+      //gets list of top 10 songs from spotify api
+      const songResponse = await fetch('/api/songs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const songs = await response.json();
+      setTopTenSongs(songs);
+
+      //gets list of top 10 artists form spotify api
+      const artistResponse = await fetch('/api/artists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,34 +55,37 @@ const MainContainer = (props) => {
       });
 
       const artists = await response.json();
+      setTopTenArtists(artists);
       console.log('main container', artists);
 
-      // await fetch('/songs', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data),
-      // });
-      // await fetch('/genres', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data),
-      // });
+      //Gets top 10 genres from spotify
+      const genreResponse = await fetch('/api/genres', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      const genres = await response.json();
+      setTopGenre(genres);
     };
     getData(data);
   }, []);
 
   return (
-    <div className='mx-10 grid-cols-1 h-screen'>
-      <IntroContainer />
+    <div className="mx-10 grid-cols-1 h-screen">
+      <IntroContainer username={username} />
       <div>
         <h2>Top 10 Songs</h2>
-        <SongsContainer />
+        <SongsContainer topSongs={topTenSong} />
       </div>
       <div>
         <h2>Top 10 Artist</h2>
-        <ArtistContainer />
+        <ArtistContainer topArtists={topTenArtists} />
       </div>
       <div>
         <h2>Top Genres</h2>
-        <GenreContainer />
+        <GenreContainer topGenre={topTenGenre} />
       </div>
     </div>
   );
