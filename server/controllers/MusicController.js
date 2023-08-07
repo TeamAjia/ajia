@@ -13,7 +13,7 @@ MusicController.getName = (req, res, next) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('spotify res', data.display_name);
+      //   console.log('spotify res', data.display_name);
       res.locals.name = data;
       return next();
     });
@@ -22,7 +22,7 @@ MusicController.getName = (req, res, next) => {
 MusicController.getNameDetails = (req, res, next) => {
   console.log('in get name details middleware');
   const items = res.locals.name;
-  console.log(items.display_name);
+  //   console.log(items.display_name);
 
   const nameDetails = {
     display_name: items.display_name,
@@ -31,7 +31,7 @@ MusicController.getNameDetails = (req, res, next) => {
 
   res.locals.name = nameDetails;
 
-  console.log('reslocalsname', res.locals.name);
+  //   console.log('reslocalsname', res.locals.name);
 
   //   console.log(res.locals.name);
   return next();
@@ -43,7 +43,7 @@ MusicController.getArtist = (req, res, next) => {
   //   console.log('req body', req.body);
   //   console.log('music conroller toke', toke);
   fetch(
-    'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=0',
+    'https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10&offset=0',
     {
       method: 'GET',
       headers: {
@@ -85,7 +85,7 @@ MusicController.getSongs = (req, res, next) => {
   console.log('in the music controller get songs middleware');
   const { toke } = req.body;
   fetch(
-    'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=0',
+    'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10&offset=0',
     {
       method: 'GET',
       headers: {
@@ -123,7 +123,7 @@ MusicController.getSongsDetails = (req, res, next) => {
 };
 
 MusicController.getPlaylists = (req, res, next) => {
-  console.log('in the music controller get songs middleware');
+  console.log('in the music controller get playlists middleware');
   const { toke } = req.body;
   fetch(
     'https://api.spotify.com/v1/browse/featured-playlists?limit=10&offset=0',
@@ -136,9 +136,33 @@ MusicController.getPlaylists = (req, res, next) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      res.locals.playlists = data;
+      res.locals.playlists = data.playlists.items;
       return next();
     });
+};
+
+MusicController.getPlaylistsDetails = (req, res, next) => {
+  console.log('in the music controller get playlist details middleware');
+  const items = res.locals.playlists;
+  //   console.log('items', items);
+
+  //   console.log(playlistDetails);
+  const playlistDetails = [];
+
+  for (let i = 0; i < items.length; i++) {
+    // console.log(items[i]);
+    const name = items[i].name;
+    const image = items[i].images[0].url;
+    const link = items[i].uri;
+    const description = items[i].description;
+
+    playlistDetails.push({ name, image, link, description });
+  }
+
+  res.locals.playlists = playlistDetails;
+
+  //   console.log('hello', res.locals.playlists);
+  return next();
 };
 
 module.exports = MusicController;
