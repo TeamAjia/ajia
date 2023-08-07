@@ -1,7 +1,8 @@
 import React from 'react';
 
 const WelcomeComponent = (props) => {
-  return <h1 className="h-min">Welcome, Julia</h1>;
+  const { display_name } = props;
+  return <h1 className="h-min">Welcome, {display_name}</h1>;
 };
 
 export default WelcomeComponent;
