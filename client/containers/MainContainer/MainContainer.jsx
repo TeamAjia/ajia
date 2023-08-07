@@ -14,25 +14,36 @@ const MainContainer = (props) => {
       toke: localStorage.getItem('access_token'),
     };
 
-    const getData = async () => {
-      await fetch('/name', {
+    console.log('main cont', data);
+    console.log('main cont', JSON.stringify(data));
+
+    const getData = async (data) => {
+      // await fetch('/name', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      // });
+
+      const response = await fetch('/api/artists', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
       });
-      await fetch('/artists', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
-      await fetch('/songs', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
-      await fetch('/genres', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
-      getData();
+
+      const artists = await response.json();
+      console.log('main container', artists);
+
+      // await fetch('/songs', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      // });
+      // await fetch('/genres', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      // });
     };
+    getData(data);
   }, []);
 
   return (

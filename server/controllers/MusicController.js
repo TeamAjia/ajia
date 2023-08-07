@@ -7,11 +7,12 @@ MusicController.getName = () => {
 };
 
 MusicController.getArtist = (req, res, next) => {
-  console.log('getArtis HERE');
+  //   console.log('getArtis HERE');
   const { toke } = req.body;
-  console.log(toke);
+  console.log('req body', req.body);
+  console.log('music conroller toke', toke);
   fetch(
-    'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=7&offset=0',
+    'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=0',
     {
       method: 'GET',
       headers: {
@@ -19,7 +20,7 @@ MusicController.getArtist = (req, res, next) => {
       },
     }
   )
-    // .then((response) => response.json())
+    .then((response) => response.json())
     .then((data) => {
       console.log('spotify res', data);
       res.locals.artists = data;
