@@ -22,15 +22,16 @@ MusicController.getName = (req, res, next) => {
 MusicController.getNameDetails = (req, res, next) => {
   console.log('in get name details middleware');
   const items = res.locals.name;
+  console.log(items.display_name);
 
   const nameDetails = {
     display_name: items.display_name,
     image: items.images[0].url,
   };
 
-  // console.log(artistDetails);
-
   res.locals.name = nameDetails;
+
+  console.lof(res.locals.name);
 
   console.log(res.locals.name);
   return next();
