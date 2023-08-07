@@ -11,7 +11,7 @@ const SongsContainer = (props) => {
         name={el.name}
         duration={el.duration}
         album={el.album}
-        aritst={el.artist}
+        artist={el.artist}
         link={el.link}
         num={idx + 1}
         key={'Song' + idx}
