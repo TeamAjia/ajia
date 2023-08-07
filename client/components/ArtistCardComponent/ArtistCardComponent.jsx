@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CardInfo from '../CardInfoComponent/CardInfo.jsx';
+import ArtistCardInfo from '../ArtistCardInfoComponent/ArtistCardInfoComponent.jsx';
 
-const Card = (props) => {
+const ArtistCardComponent = (props) => {
   const { url, num } = props;
   return (
     <div className='flex carousel-item overflow-x'>
@@ -13,10 +13,10 @@ const Card = (props) => {
         <div className='swap-off'>
           <img src={url} className='rounded-box ring ring-accent' />
         </div>
-        <CardInfo />
+        <ArtistCardInfo />
       </label>
     </div>
   );
 };
 
-export default Card;
+export default ArtistCardComponent;
