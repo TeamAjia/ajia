@@ -5,9 +5,9 @@ import { Navigate } from 'react-router-dom';
 const OAuthContContainer = () => {
   if (true) {
     if (localStorage.getItem('access_token')) {
-      return <Navigate to="/home" />;
+      return <Navigate to='/home' />;
     } else {
-      return <Navigate to="/login" />;
+      return <Navigate to='/login' />;
     }
   }
 };

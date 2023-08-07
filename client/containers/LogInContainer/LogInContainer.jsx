@@ -23,7 +23,7 @@ const LoginContainer = (props) => {
           scaleMobile: 1.0,
           spacing: 8.0,
           color: 0x1db954,
-          chaos: 10.0,
+          chaos: 15.0,
         })
       );
     }

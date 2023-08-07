@@ -43,7 +43,7 @@ MusicController.getArtist = (req, res, next) => {
   //   console.log('req body', req.body);
   //   console.log('music conroller toke', toke);
   fetch(
-    'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=0',
+    `https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=0`,
     {
       method: 'GET',
       headers: {
@@ -85,7 +85,7 @@ MusicController.getSongs = (req, res, next) => {
   console.log('in the music controller get songs middleware');
   const { toke } = req.body;
   fetch(
-    'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10&offset=0',
+    'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50&offset=0',
     {
       method: 'GET',
       headers: {

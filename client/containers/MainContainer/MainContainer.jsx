@@ -14,6 +14,11 @@ const MainContainer = (props) => {
   const [topTenPlaylists, setTopPlaylists] = useState([]);
   const [username, setUsername] = useState({});
 
+  const setTheme = (theme) => {
+    console.log('hi');
+    document.querySelector('html').setAttribute('data-theme', theme);
+  };
+
   const checkAccessToken = () => {
     if (!localStorage.getItem('access_token')) {
       return false;
@@ -81,23 +86,60 @@ const MainContainer = (props) => {
   }, []);
 
   return checkAccessToken() ? (
-    <div className=" mx-10 mt-5 grid-cols-1 h-screen font-mono">
+    <div className=' mx-10 mt-5 grid-cols-1 h-screen font-mono'>
       <IntroContainer username={username} />
+      <div className='flex justify-center gap-4'>
+        <button
+          onClick={(e) => setTheme('mytheme')}
+          data-theme='mytheme'
+          className='btn btn-primary'
+        >
+          Original
+        </button>
+        <button
+          onClick={(e) => setTheme('cupcake')}
+          data-theme='cupcake'
+          className='btn btn-primary'
+        >
+          cupcake
+        </button>
+        <button
+          onClick={(e) => setTheme('coffee')}
+          data-theme='coffee'
+          className='btn btn-primary'
+        >
+          Coffee
+        </button>
+        <button
+          onClick={(e) => setTheme('dracula')}
+          data-theme='dracula'
+          className='btn btn-primary'
+        >
+          Dracula
+        </button>
+        <button
+          onClick={(e) => setTheme('cmyk')}
+          data-theme='cmyk'
+          className='btn btn-primary'
+        >
+          CMYK
+        </button>
+      </div>
       <div>
-        <h2 className="text-xl mt-5">Top 10 Songs</h2>
+        <h2 className='text-xl mt-5'>Your Top 50 Songs</h2>
         <SongsContainer topSongs={topTenSong} />
       </div>
       <div>
-        <h2 className="text-xl mt-5">Top 10 Artist</h2>
+        <h2 className='text-xl mt-5'>Your Top 10 Artists</h2>
         <ArtistContainer topArtists={topTenArtists} />
       </div>
       <div>
-        <h2 className="text-xl mt-5">Featured Playlists</h2>
+        <h2 className='text-xl mt-5'>Your Featured Playlists</h2>
         <PlaylistContainer playlists={topTenPlaylists} />
       </div>
     </div>
   ) : (
-    <Navigate to="/" />
+    <Navigate to='/' />
   );
 };
 

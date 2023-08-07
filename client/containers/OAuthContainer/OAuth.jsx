@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 const OAuthContainer = () => {
   if (true) {
     extractCode();
-    return <Navigate to="/loginCont" />;
+    return <Navigate to='/loginCont' />;
   }
 };
 

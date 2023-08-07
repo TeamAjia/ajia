@@ -7,11 +7,11 @@ const IntroContainer = (props) => {
   const { username } = props;
   return (
     <>
-      <div className="flex justify-between">
+      <div className='flex justify-between'>
         <WelcomeComponent username={username.display_name} />
         <ProfileContainer image={username.image} />
       </div>
-      <div class="divider"></div>
+      <div className='divider'></div>
     </>
   );
 };
