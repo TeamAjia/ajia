@@ -3,15 +3,21 @@ import React, { Component } from 'react';
 const CardInfo = (props) => {
   const { name, duration, artist, album, link } = props;
 
+  function mtoS(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   return (
-    <div className="flex flex-col flex-wrap-R swap-on bg-black rounded-box ring ring-accent font-mono text-sm ">
-      <p className="p-2 text-white flex flex-wrap">Song Title: {name}</p>
-      <p className="p-2 text-white">Duration: {duration} </p>
+    <div className="flex flex-col w-64 h-64 flex-wrap swap-on bg-black rounded-box ring ring-primary font-mono text-small justify-center content-center">
+      <p className="p-2 text-white ">Song: {name.slice(0, 30)}</p>
+      <p className="p-2 text-white">Duration: {mtoS(duration)} </p>
       <p className="p-2 text-white">Artist: {artist}</p>
-      <p className="p-2 text-white">Album: {album}</p>
-      <a href={link}>
-        <p className="p-2 text-white">Link</p>
-      </a>
+      <p className="p-2 text-white">Album: {album.slice(0, 20) + '...'}</p>
+      <button className="self-center btn btn-primary max-w-fit">
+        <a href={link}>Listen to Song!</a>
+      </button>
     </div>
   );
 };

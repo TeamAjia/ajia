@@ -34,7 +34,7 @@ function extractCode() {
   let body = new URLSearchParams({
     grant_type: 'authorization_code',
     code: code,
-    redirect_uri: 'http://localhost:8080/home',
+    redirect_uri: 'http://localhost:8080/login',
     client_id: 'f1ae3071e1544d8a9722e15b1dd38489',
     code_verifier: codeVerifier,
   });
@@ -61,4 +61,8 @@ function extractCode() {
     });
 }
 
-module.exports = { generateRandomString, generateCodeChallenge, extractCode };
+module.exports = {
+  generateRandomString,
+  generateCodeChallenge,
+  extractCode,
+};

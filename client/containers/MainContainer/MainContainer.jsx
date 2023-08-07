@@ -2,25 +2,33 @@ import React, { useState } from 'react';
 import IntroContainer from '../IntroContainer/IntroContainer.jsx';
 import SongsContainer from '../SongsContainer/SongsContainer.jsx';
 import ArtistContainer from '../ArtistContainer/ArtistContainer.jsx';
-import GenreContainer from '../GenreContainer/GenreContainer.jsx';
+import PlaylistContainer from '../PlaylistContainer/PlaylistContainer.jsx';
 import { extractCode } from '../../helpers/helpers.js';
+import { checkAccessToken } from '../../helpers/helpers.js';
+import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const MainContainer = (props) => {
   const [topTenSong, setTopTenSongs] = useState([]);
   const [topTenArtists, setTopTenArtists] = useState([]);
-  const [topTenGenre, setTopGenre] = useState([]);
+  const [topTenPlaylists, setTopPlaylists] = useState([]);
   const [username, setUsername] = useState({});
 
+  const checkAccessToken = () => {
+    if (!localStorage.getItem('access_token')) {
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
-    extractCode();
     console.log(localStorage.getItem('access_token'));
     const data = {
       toke: localStorage.getItem('access_token'),
     };
 
     console.log('main cont', data);
-    console.log('main cont', JSON.stringify(data));
+    // console.log('main cont', JSON.stringify(data));
 
     const getData = async (data) => {
       //Gets username from spotify api
@@ -31,7 +39,7 @@ const MainContainer = (props) => {
         },
         body: JSON.stringify(data),
       });
-      const user = await response.json();
+      const user = await userResponse.json();
       setUsername(user);
 
       //gets list of top 10 songs from spotify api
@@ -42,7 +50,7 @@ const MainContainer = (props) => {
         },
         body: JSON.stringify(data),
       });
-      const songs = await response.json();
+      const songs = await songResponse.json();
       setTopTenSongs(songs);
 
       //gets list of top 10 artists form spotify api
@@ -54,40 +62,42 @@ const MainContainer = (props) => {
         body: JSON.stringify(data),
       });
 
-      const artists = await response.json();
+      const artists = await artistResponse.json();
       setTopTenArtists(artists);
       console.log('main container', artists);
 
       //Gets top 10 genres from spotify
-      const genreResponse = await fetch('/api/genres', {
+      const playlistsResponse = await fetch('/api/playlists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-      const genres = await response.json();
-      setTopGenre(genres);
+      const playlists = await playlistsResponse.json();
+      setTopPlaylists(playlists);
     };
     getData(data);
   }, []);
 
-  return (
-    <div className="mx-10 grid-cols-1 h-screen">
+  return checkAccessToken() ? (
+    <div className=" mx-10 mt-5 grid-cols-1 h-screen font-mono">
       <IntroContainer username={username} />
       <div>
-        <h2>Top 10 Songs</h2>
+        <h2 className="text-xl mt-5">Top 10 Songs</h2>
         <SongsContainer topSongs={topTenSong} />
       </div>
       <div>
-        <h2>Top 10 Artist</h2>
+        <h2 className="text-xl mt-5">Top 10 Artist</h2>
         <ArtistContainer topArtists={topTenArtists} />
       </div>
       <div>
-        <h2>Top Genres</h2>
-        <GenreContainer topGenre={topTenGenre} />
+        <h2 className="text-xl mt-5">Featured Playlists</h2>
+        <PlaylistContainer playlists={topTenPlaylists} />
       </div>
     </div>
+  ) : (
+    <Navigate to="/" />
   );
 };
 
