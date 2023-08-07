@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const CardInfo = (props) => {
+const ArtistCardInfo = (props) => {
   return (
     <div className='flex flex-col flex-wrap-R swap-on bg-black rounded-box ring ring-accent font-mono text-sm '>
       <p className='p-2 text-white flex flex-wrap'>Artist Name:</p>
@@ -8,4 +8,4 @@ const CardInfo = (props) => {
   );
 };
 
-export default CardInfo;
+export default ArtistCardInfo;
